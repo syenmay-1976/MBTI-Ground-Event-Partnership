@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ground Events &amp; Partnership — MBTI Fit Test | CelcomDigi</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#001871; --space:#01091C; --yellow:#FFE000; --bright:#0064DC;
+    --celcom:#009BDF; --ice:#7ED3F1; --peach:#F9B073; --white:#FFFFFF;
+    --h:'Montserrat',Arial,sans-serif; --b:'Lato',Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:linear-gradient(160deg,var(--navy) 0%,var(--space) 100%);
+    background-attachment:fixed; color:var(--white); font-family:var(--b);
+    min-height:100vh; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:40px 20px 60px}
+  .h{font-family:var(--h)}
+
+  /* header */
+  .top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:34px}
+  .brandmark{display:flex;align-items:center;gap:8px}
+  .dot{width:8px;height:8px;border-radius:50%;display:block}
+  .eyebrow{font-size:11px;letter-spacing:2px;color:rgba(255,255,255,.55)}
+  .ghost{background:none;border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.7);
+    font-family:var(--b);font-size:12px;padding:7px 15px;border-radius:99px;cursor:pointer;transition:.15s}
+  .ghost:hover{border-color:var(--yellow);color:var(--yellow)}
+
+  /* intro */
+  h1{font-family:var(--h);font-weight:300;font-size:44px;line-height:1.15;margin-bottom:18px}
+  h1 em{font-style:normal;color:var(--yellow);font-weight:600}
+  .lede{font-size:16px;color:rgba(255,255,255,.75);max-width:620px;line-height:1.65;margin-bottom:30px}
+  .pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;max-width:580px;margin-bottom:32px}
+  .pillar{padding:12px 14px;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)}
+  .pillar b{font-family:var(--h);font-weight:600;font-size:12px;color:var(--yellow);letter-spacing:1px;display:block}
+  .pillar span{font-size:12.5px;color:rgba(255,255,255,.6)}
+  .cta{font-family:var(--h);font-weight:600;font-size:15px;background:var(--yellow);color:var(--navy);
+    border:none;padding:16px 32px;border-radius:99px;cursor:pointer;transition:.15s}
+  .cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,224,0,.2)}
+  .outline{font-family:var(--h);font-weight:600;font-size:14px;background:transparent;color:var(--yellow);
+    border:1px solid var(--yellow);padding:12px 26px;border-radius:99px;cursor:pointer}
+  .fineprint{font-size:12px;color:rgba(255,255,255,.4);max-width:580px;line-height:1.55;margin-top:20px}
+
+  /* quiz */
+  .meta{display:flex;justify-content:space-between;font-size:12px;color:rgba(255,255,255,.55);margin-bottom:8px}
+  .meta .axis{color:var(--yellow)}
+  .track{height:4px;border-radius:99px;background:rgba(255,255,255,.12);margin-bottom:26px}
+  .bar{height:4px;border-radius:99px;background:var(--yellow);width:0;transition:width .3s ease}
+  .jdline{font-size:11.5px;color:var(--ice);border-left:2px solid var(--bright);padding-left:12px;line-height:1.45;margin-bottom:14px}
+  .q{font-family:var(--h);font-weight:300;font-size:25px;line-height:1.35;margin-bottom:24px}
+  .opt{display:block;width:100%;text-align:left;padding:20px;margin-bottom:12px;border-radius:12px;
+    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);color:var(--white);
+    font-family:var(--b);font-size:15px;line-height:1.5;cursor:pointer;transition:transform .15s,border-color .15s,background .15s}
+  .opt:hover{transform:translateY(-2px);border-color:var(--yellow);background:rgba(255,224,0,.06)}
+  .opt:focus-visible{outline:2px solid var(--yellow);outline-offset:2px}
+  .opt .k{font-family:var(--h);font-weight:600;font-size:13px;color:var(--yellow);margin-right:12px}
+  .navlinks{display:flex;gap:18px;margin-top:14px}
+  .link{background:none;border:none;color:rgba(255,255,255,.5);font-family:var(--b);font-size:13px;cursor:pointer}
+  .link:hover{color:var(--yellow)}
+
+  /* result */
+  .head{display:flex;gap:26px;align-items:center;flex-wrap:wrap;margin-bottom:30px}
+  .typecode{font-family:var(--h);font-weight:600;font-size:40px;color:var(--yellow);letter-spacing:2px;line-height:1.1}
+  .typename{font-family:var(--h);font-weight:300;font-size:20px}
+  .typecore{font-size:14px;color:rgba(255,255,255,.7);max-width:420px;line-height:1.55;margin-top:8px}
+  .verdict{padding:20px;border-radius:12px;background:rgba(255,255,255,.05);margin-bottom:30px}
+  .verdict b{font-family:var(--h);font-weight:600;font-size:17px;display:block;margin-bottom:4px}
+  .verdict p{font-size:14px;color:rgba(255,255,255,.75);line-height:1.6}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:30px}
+  .sect{font-family:var(--h);font-weight:600;font-size:13px;letter-spacing:1px;color:rgba(255,255,255,.6);margin-bottom:16px}
+  .axisrow{margin-bottom:16px}
+  .axislabels{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px}
+  .axistrack{height:8px;border-radius:99px;background:rgba(255,255,255,.12);position:relative;overflow:hidden}
+  .axisfill{position:absolute;top:0;height:8px;border-radius:99px;background:var(--yellow);transition:width .9s ease}
+  .axispct{text-align:right;font-size:11px;color:rgba(255,255,255,.5);margin-top:4px}
+  .lane{padding:20px;border-radius:12px;margin-bottom:30px;
+    background:linear-gradient(120deg,rgba(0,100,220,.25),rgba(0,155,223,.08));border:1px solid rgba(126,211,241,.25)}
+  .lane .tagline{font-size:11px;letter-spacing:2px;color:var(--ice);margin-bottom:4px}
+  .lane h3{font-family:var(--h);font-weight:600;font-size:22px}
+  .lane h3 span{color:var(--yellow);font-weight:300}
+  .lane p{font-size:14px;color:rgba(255,255,255,.75);line-height:1.6;margin:8px 0 18px}
+  .lanerow{display:flex;align-items:center;gap:12px;margin-bottom:9px}
+  .lanerow .nm{font-size:12px;width:180px;color:rgba(255,255,255,.55)}
+  .lanerow .nm.on{color:var(--yellow)}
+  .lanetrack{flex:1;height:6px;border-radius:99px;background:rgba(255,255,255,.12)}
+  .lanefill{height:6px;border-radius:99px;background:rgba(255,255,255,.3)}
+  .lanefill.on{background:var(--yellow)}
+  .lanerow .vv{font-size:11px;color:rgba(255,255,255,.4);width:26px}
+  .card{padding:20px;border-radius:12px;background:rgba(255,255,255,.05)}
+  .card h4{font-family:var(--h);font-weight:600;font-size:14px;margin-bottom:14px}
+  .card li{list-style:none;font-size:13.5px;color:rgba(255,255,255,.8);line-height:1.55;margin-bottom:12px;padding-left:16px;position:relative}
+  .card li:before{content:"▸";position:absolute;left:0}
+
+  /* 16 types */
+  .tier{margin-bottom:26px}
+  .tierhead{font-family:var(--h);font-weight:600;font-size:13px;letter-spacing:1px;margin-bottom:12px}
+  .typegrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .tcard{padding:16px;border-radius:12px;background:rgba(255,255,255,.05)}
+  .trow{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+  .tcode{font-family:var(--h);font-weight:600;font-size:17px;color:var(--yellow);letter-spacing:1px}
+  .tcode small{font-family:var(--h);font-weight:300;font-size:14px;color:var(--white);letter-spacing:0}
+  .tfit{font-family:var(--h);font-weight:600;font-size:16px}
+  .tcore{font-size:12.5px;color:rgba(255,255,255,.55);line-height:1.5;margin-bottom:8px}
+  .tline{font-size:12.5px;line-height:1.5;margin-bottom:4px;color:rgba(255,255,255,.8)}
+  .tlane{font-size:11.5px;color:rgba(255,255,255,.45);margin-top:6px}
+
+  footer{font-size:10.5px;color:rgba(255,255,255,.35);border-top:1px solid rgba(255,255,255,.1);
+    padding-top:20px;margin-top:50px;line-height:1.6}
+  .hidden{display:none}
+  .fade{animation:fi .35s ease}
+  @keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  @media (max-width:720px){
+    h1{font-size:34px}.q{font-size:21px}.cols,.typegrid{grid-template-columns:1fr;gap:24px}
+    .lanerow .nm{width:120px}
+  }
+  @media print{body{background:#fff;color:#000}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div class="brandmark">
+      <span class="dot" style="background:var(--celcom)"></span>
+      <span class="dot" style="background:var(--yellow)"></span>
+      <span class="eyebrow">SALES GROUND EVENTS &amp; PARTNERSHIP SPECIALIST</span>
+    </div>
+    <button class="ghost" id="toggleTypes">All 16 types</button>
+  </div>
+
+  <!-- ============================ INTRO ============================ -->
+  <section id="intro" class="fade">
+    <h1>Does this person<br>fit the <em>JD?</em></h1>
+    <p class="lede">
+      Twenty questions, each one built from a line in the Sales Ground Events &amp; Partnership Specialist job
+      description — the 7am promoter briefing, the CI artwork check, the vendor who under-delivered twice, the venue
+      that moves load-in with 24 hours' notice. Answer as you actually are, not as a good events person is supposed
+      to be. Four minutes.
+    </p>
+    <div class="pillars">
+      <div class="pillar"><b>E / I</b><span>Energy &amp; stakeholder load</span></div>
+      <div class="pillar"><b>S / N</b><span>Detail vs concept</span></div>
+      <div class="pillar"><b>T / F</b><span>Accountability vs harmony</span></div>
+      <div class="pillar"><b>J / P</b><span>Plan vs improvise</span></div>
+    </div>
+    <button class="cta" id="start">Start the test →</button>
+    <p class="fineprint">
+      A development and lane-placement conversation starter. MBTI is not a validated selection instrument —
+      don't use this to accept or reject a candidate.
+    </p>
+  </section>
+
+  <!-- ============================ QUIZ ============================= -->
+  <section id="quiz" class="hidden">
+    <div class="meta"><span id="counter"></span><span class="axis" id="axisLabel"></span></div>
+    <div class="track"><div class="bar" id="bar"></div></div>
+    <div id="qbody"></div>
+    <div class="navlinks">
+      <button class="link" id="back">← Back</button>
+      <button class="link" id="restart1">Start over</button>
+    </div>
+  </section>
+
+  <!-- =========================== RESULT ============================ -->
+  <section id="result" class="hidden"></section>
+
+  <!-- ========================= 16 TYPES ============================ -->
+  <section id="types" class="hidden"></section>
+
+  <footer>
+    Internal Only · Indicative profiling tool for team development and lane placement, mapped to the Sales Ground
+    Events &amp; Partnership Specialist job description. MBTI is not a validated selection instrument and must not be
+    used as a basis for hiring, promotion or performance decisions.
+  </footer>
+</div>
+
+<script>
+/* ------------------------------- questions ------------------------------- */
+const QUESTIONS = [
+  {axis:"EI",jd:"Prepare and conduct operational briefings with internal teams, promoters, agencies and vendors",
+   q:"7am on setup day. Forty promoters, three vendors and the mall ops team are waiting for the briefing.",
+   a:"You run it yourself. Standing in front of that room is the best part of the day.",
+   b:"You'd rather build a tight briefing pack and let someone else deliver it.",A:"E",B:"I"},
+  {axis:"EI",jd:"Strong in stakeholder management, communication and coordination across multiple parties",
+   q:"A regional stakeholder is quietly unhappy with the roadshow plan.",
+   a:"Call him. It gets sorted faster in a conversation.",
+   b:"Send a clear written note laying out the plan, then follow up.",A:"E",B:"I"},
+  {axis:"EI",jd:"Flexible and committed to support events during weekends, public holidays and extended hours",
+   q:"Three weekends of roadshows, back to back. By Sunday night of week three:",
+   a:"Still running. The crowd gives you more than it takes.",
+   b:"Flat. You need silence and a day away from the floor.",A:"E",B:"I"},
+  {axis:"EI",jd:"Passionate about events, customer engagement and delivering execution excellence",
+   q:"On event day, you're most useful:",
+   a:"Out front — with customers, dealers and the crowd.",
+   b:"Behind the scenes — watching the flow, catching what's about to break.",A:"E",B:"I"},
+  {axis:"EI",jd:"Proactive and solution-oriented, with the ability to drive resolutions effectively",
+   q:"You've hit a problem you can't solve on your own.",
+   a:"Get people in a room and thrash it out.",
+   b:"Work it through yourself first, then bring a proposal.",A:"E",B:"I"},
+
+  {axis:"SN",jd:"Ensure all branding and executions comply with Corporate Identity standards",
+   q:"The EO sends booth artwork for approval.",
+   a:"You check logo clear space, colour codes and CI rules line by line.",
+   b:"You look at whether the whole thing feels like CelcomDigi.",A:"S",B:"N"},
+  {axis:"SN",jd:"Develop post-event analysis and reports to evaluate effectiveness and business impact",
+   q:"Writing the post-mortem, you're strongest at:",
+   a:"Getting every number right — GA, footfall, cost per acquisition.",
+   b:"Explaining the pattern behind why some events worked and others didn't.",A:"S",B:"N"},
+  {axis:"SN",jd:"Proactively recommend new ideas, activation concepts and engagement mechanics",
+   q:"You're asked for a fresh activation concept for next quarter.",
+   a:"Start from what worked last year and make it sharper.",
+   b:"Start from a blank page and a new idea.",A:"S",B:"N"},
+  {axis:"SN",jd:"Manage event setup assets, inventory, logistics and operational readiness",
+   q:"Two days before setup, where's your head?",
+   a:"POSM counted, truck confirmed, power supply checked.",
+   b:"How the customer will move through the space and what they'll feel.",A:"S",B:"N"},
+  {axis:"SN",jd:"Ensure proper documentation, reporting accuracy and compliance with financial processes",
+   q:"Reconciling the event budget, invoice by invoice.",
+   a:"Every line matched. It's oddly satisfying.",
+   b:"Necessary — but you'd rather be planning the next one.",A:"S",B:"N"},
+
+  {axis:"TF",jd:"Escalate operational risks and issues together with mitigation plans in a timely manner",
+   q:"A vendor has under-delivered twice. The next event is at risk.",
+   a:"Escalate with the facts and a replacement plan attached.",
+   b:"Sit with them first. Understand what's breaking before you escalate.",A:"T",B:"F"},
+  {axis:"TF",jd:"Ensure deliverables are completed within agreed timelines, budget and quality standards",
+   q:"You have to cut RM40K from the activation budget.",
+   a:"Cut whatever returns least, regardless of whose element it is.",
+   b:"Work it through with the owners so nobody gets blindsided.",A:"T",B:"F"},
+  {axis:"TF",jd:"Collaborate and align closely with regional teams on sales roadshows and ground activation plans",
+   q:"Two regions want the same flagship roadshow weekend.",
+   a:"It goes to the region with the stronger sales case.",
+   b:"Broker something both can live with — you need them both next quarter.",A:"T",B:"F"},
+  {axis:"TF",jd:"Able to remain calm, resourceful and execution-focused under pressure",
+   q:"An hour before doors open, a promoter is in tears and the stage isn't ready.",
+   a:"Stage first. You'll deal with the promoter once the show is safe.",
+   b:"Two minutes with her first. She still has to face that crowd.",A:"T",B:"F"},
+  {axis:"TF",jd:"Highly accountable with a strong ownership mindset",
+   q:"An event underperformed, and it was partly your call.",
+   a:"Say so plainly in the report, with the fix.",
+   b:"Say so — but carefully, so the team doesn't lose confidence.",A:"T",B:"F"},
+
+  {axis:"JP",jd:"Ability to independently manage projects from planning through to execution",
+   q:"Six weeks out from a nationwide activation.",
+   a:"Full timeline exists. Owners named. Dates locked.",
+   b:"The big rocks are locked. The detail will firm up as you go.",A:"J",B:"P"},
+  {axis:"JP",jd:"Able to remain calm and resourceful under pressure",
+   q:"The venue moves your load-in time with 24 hours' notice.",
+   a:"Open the contingency plan you already wrote.",
+   b:"Rebuild it on the spot. You're sharper under pressure anyway.",A:"J",B:"P"},
+  {axis:"JP",jd:"Comfortable in a fast-paced environment with strong multitasking and prioritisation skills",
+   q:"Nine events running across five regions this month.",
+   a:"One master tracker, reviewed daily. Nothing moves without it.",
+   b:"You hold it in your head and go where the fire is.",A:"J",B:"P"},
+  {axis:"JP",jd:"Detail-oriented with strong follow-through on timelines and deliverables",
+   q:"The agency asks for three more days on the POSM artwork.",
+   a:"No. The timeline was agreed and print won't wait.",
+   b:"Fine — if you can compress elsewhere. Better artwork is worth it.",A:"J",B:"P"},
+  {axis:"JP",jd:"Monitor project progress proactively",
+   q:"You feel most in control when:",
+   a:"Every deliverable is ticked and dated.",
+   b:"You know you can handle whatever walks through the door.",A:"J",B:"P"}
+];
+
+const PILLAR = {EI:"Energy & stakeholder load",SN:"Detail vs concept",TF:"Accountability vs harmony",JP:"Plan vs improvise"};
+
+/* ---------------------------- fit model (from JD) ------------------------- */
+const IDEAL  = {E:80,S:65,T:55,J:70};
+const WEIGHT = {E:.28,S:.24,T:.18,J:.30};
+
+/* ------------------------------ 16-type library --------------------------- */
+const TYPES = {
+ ESTJ:{fit:86,name:"The Executive",nick:"The Operator",core:"Organised, decisive, fact-driven, rule-respecting. Runs on structure and gets things finished.",sup:"Owns a nationwide activation end to end and lands it on time, on budget, on brand.",risk:"Rigid when the plan has to change. Can steamroll softer stakeholders.",lane:"Ground Execution — lead"},
+ ESFJ:{fit:83,name:"The Consul",nick:"The Host",core:"Warm, dutiful, highly organised, people-first. Remembers everyone and follows through.",sup:"Holds HQ, regions, agencies and vendors together — the coordination the JD asks for, done naturally.",risk:"Avoids the hard vendor conversation. Takes criticism of the event personally.",lane:"Ground Execution / Stakeholder management"},
+ ENTJ:{fit:74,name:"The Commander",nick:"The Strategist",core:"Bold, strategic, commercially ruthless, natural leader. Builds the plan and defends it.",sup:"Wins the partnership, defends the budget in front of management, prioritises a crowded calendar.",risk:"Impatient with detail and with people slower than them. May under-invest in documentation.",lane:"Partnership & Sponsorship"},
+ ENFJ:{fit:71,name:"The Protagonist",nick:"The Alliance Builder",core:"Charismatic, persuasive, reads a room instantly, genuinely invested in people.",sup:"Makes device partners and sponsors want to say yes. Excellent at briefings and regional alignment.",risk:"Over-promises to keep everyone happy. Conflict-averse when a vendor needs cutting.",lane:"Partnership & Sponsorship"},
+ ESTP:{fit:67,name:"The Entrepreneur",nick:"The Floor Closer",core:"Bold, pragmatic, thrives in chaos, learns by doing. Bored by paperwork.",sup:"Event day. Nobody handles a live crisis better — venue changes, artist cancels, crowd surges.",risk:"The reports, reconciliation and documentation the JD demands will be late or thin.",lane:"Ground Execution — floor"},
+ ESFP:{fit:64,name:"The Entertainer",nick:"The Crowd Igniter",core:"Spontaneous, energetic, people-magnet, lives in the moment.",sup:"Turns a dead booth into a queue. Promoters and crowds respond to them instantly.",risk:"Timelines, budgets and compliance are a real weakness. Needs a planner behind them.",lane:"Ground Execution — floor"},
+ ISTJ:{fit:63,name:"The Logistician",nick:"The Backbone",core:"Practical, meticulous, reliable, procedure-driven. Says what they'll do and does it.",sup:"The timeline, the POSM count, the budget reconciliation, the CI compliance check. Never ships broken.",risk:"The JD wants someone in front of forty promoters and six stakeholder groups. That drains them.",lane:"Planning, Reporting & Ops"},
+ ISFJ:{fit:60,name:"The Defender",nick:"The Guardian",core:"Quietly dedicated, detail-perfect, protective of the team, dislikes conflict and change.",sup:"The systems and documentation everyone else relies on. Nothing gets forgotten.",risk:"Won't push back on an unreasonable stakeholder. Struggles with the pace and visibility.",lane:"Planning, Reporting & Ops"},
+ ENTP:{fit:55,name:"The Debater",nick:"The Concept Machine",core:"Inventive, argumentative, quick, allergic to routine. Ten ideas an hour.",sup:"The activation concept that wins the sponsor. Sharp in a negotiation.",risk:"Starts everything, finishes little. The JD's follow-through and reporting demands are their weak spot.",lane:"Trade Marketing & Creative"},
+ ENFP:{fit:52,name:"The Campaigner",nick:"The Spark",core:"Enthusiastic, creative, relationship-driven, easily bored by admin.",sup:"Energy, ideas and partner relationships in one person. Great at concepting and at the launch.",risk:"Timelines slip. Detail is genuinely painful. Cannot be left alone with a budget file.",lane:"Trade Marketing & Creative"},
+ INTJ:{fit:52,name:"The Architect",nick:"The Planner",core:"Strategic, independent, sceptical, long-horizon. Builds systems, hates inefficiency.",sup:"Designs the annual event portfolio and the business case behind it. Sees the flaw before it costs money.",risk:"Ground events are relentlessly social and reactive. That's their least comfortable terrain.",lane:"Portfolio Strategy & Planning"},
+ INFJ:{fit:49,name:"The Advocate",nick:"The Compass",core:"Insightful, principled, quietly determined, reads people deeply.",sup:"Brand storytelling and the why behind an event. Excellent one-to-one with partners.",risk:"Burns out fast in a weekend-and-public-holiday execution role. Overloads on stakeholder noise.",lane:"Brand & Concept"},
+ ISTP:{fit:44,name:"The Virtuoso",nick:"The Fixer",core:"Practical, calm, hands-on, minimal words. Solves what's in front of them.",sup:"Setup, rigging, technical ops, logistics. Unflappable when something physically breaks.",risk:"Stakeholder management, briefings and reporting — three JD pillars — are all uphill.",lane:"Technical Ops & Logistics"},
+ ISFP:{fit:41,name:"The Adventurer",nick:"The Craftsman",core:"Aesthetic, gentle, present-focused, avoids conflict and structure.",sup:"Makes the space feel like something. Strong eye for VM and booth experience.",risk:"Deadlines, escalation and multi-stakeholder pressure are a poor match for their wiring.",lane:"Visual Merchandising & Creative"},
+ INTP:{fit:33,name:"The Logician",nick:"The Analyst",core:"Analytical, abstract, precise with logic, indifferent to process and people-politics.",sup:"Post-event analysis. Will find the flaw in the ROI case that nobody else saw.",risk:"Almost everything else in this JD — the crowds, the weekends, the coordination, the ownership.",lane:"Analytics & Post-Mortem"},
+ INFP:{fit:30,name:"The Mediator",nick:"The Storyteller",core:"Idealistic, private, values-driven, resistant to rigid structure.",sup:"Meaning, message and the human story of a campaign.",risk:"This JD is fast, loud, deadline-bound and confrontational. It would cost them a great deal.",lane:"Not an events-facing seat"}
+};
+
+const LANES = {
+ exec:{name:"Ground Execution",tag:"the floor",desc:"Roadshows, mall activations, nationwide events. Live crowd, live problems, live sales."},
+ partner:{name:"Partnership & Sponsorship",tag:"the deal",desc:"Device partners, sponsors, co-investment. Turning relationships into commercial value."},
+ creative:{name:"Trade Marketing & Creative",tag:"the idea",desc:"Concepts, briefs, POSM, engagement mechanics — the reason the booth is worth walking into."},
+ ops:{name:"Planning, Reporting & Ops",tag:"the engine",desc:"Timelines, budgets, documentation, post-mortems. The governance that keeps 40 events standing."}
+};
+
+const TIERS = [
+ {label:"STRONG FIT",color:"var(--yellow)",types:["ESTJ","ESFJ"]},
+ {label:"GOOD FIT",color:"var(--ice)",types:["ENTJ","ENFJ","ESTP","ESFP"]},
+ {label:"CONDITIONAL — RIGHT LANE ONLY",color:"var(--celcom)",types:["ISTJ","ISFJ","ENTP","ENFP","INTJ"]},
+ {label:"WEAK FIT FOR THIS JD",color:"var(--peach)",types:["INFJ","ISTP","ISFP","INTP","INFP"]}
+];
+
+/* --------------------------------- state ---------------------------------- */
+let idx = 0, answers = {};
+const $ = id => document.getElementById(id);
+const show = id => $(id).classList.remove("hidden");
+const hide = id => $(id).classList.add("hidden");
+
+/* -------------------------------- scoring --------------------------------- */
+function score(){
+  const raw = {E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0};
+  QUESTIONS.forEach((q,i)=>{ const p = answers[i]; if(p) raw[p==="a"?q.A:q.B]++; });
+  const pct = {E:raw.E/5*100, S:raw.S/5*100, T:raw.T/5*100, J:raw.J/5*100};
+  const type = (pct.E>=50?"E":"I")+(pct.S>=50?"S":"N")+(pct.T>=50?"T":"F")+(pct.J>=50?"J":"P");
+  let pen = 0;
+  for(const k in IDEAL) pen += WEIGHT[k]*Math.abs(pct[k]-IDEAL[k]);
+  const fit = Math.max(5, Math.min(100, Math.round(100 - 1.6*pen)));
+  const F = 100-pct.T, N = 100-pct.S, P = 100-pct.J;
+  const c = {
+    ownership:   Math.round(pct.J*.5 + pct.T*.5),
+    execution:   Math.round(pct.S*.5 + pct.J*.5),
+    stakeholder: Math.round(pct.E*.5 + F*.5),
+    pressure:    Math.round(pct.T*.6 + P*.4),
+    ideas:       Math.round(N),
+    stamina:     Math.round(pct.E)
+  };
+  const ls = {
+    exec:     .35*c.stamina + .35*c.execution + .30*c.pressure,
+    partner:  .40*c.stakeholder + .35*pct.T + .25*c.stamina,
+    creative: .55*c.ideas + .25*c.stakeholder + .20*P,
+    ops:      .55*c.execution + .45*c.ownership
+  };
+  const lane = Object.keys(ls).sort((a,b)=>ls[b]-ls[a])[0];
+  return {pct,type,fit,c,lane,ls};
+}
+
+function band(f){
+  if(f>=80) return {label:"Strong fit — hire with confidence",color:"var(--yellow)",note:"This profile matches what the JD actually asks for: outward-facing, organised, accountable, follow-through."};
+  if(f>=65) return {label:"Good fit — with one gap to manage",color:"var(--ice)",note:"Core wiring is right for the role. There's one dimension that will need a support structure around it."};
+  if(f>=50) return {label:"Conditional fit — right lane only",color:"var(--celcom)",note:"Real strengths here, but not across the whole JD. Works in a specialised seat, not as an all-rounder."};
+  return {label:"Weak fit for this JD",color:"var(--peach)",note:"The weekends, the crowds, the coordination load and the documentation would all run against the grain. Adjacent roles would use these strengths better."};
+}
+
+function insights(p,c){
+  const s=[],w=[];
+  if(p.E>=80) s.push("Built for the stakeholder load — briefings, regions, agencies, vendors. The JD asks for this and you have it.");
+  if(p.E<=40) w.push("The JD demands constant coordination across six stakeholder groups, plus weekends. This will drain you faster than it drains others.");
+  if(p.J>=80) s.push("Timeline discipline. Deliverables land on the agreed date — the single most repeated demand in this JD.");
+  if(p.J<=40) w.push("Documentation, reporting accuracy and financial compliance are explicit JD requirements. This is your weak flank — build a system, not willpower.");
+  if(p.S>=80) s.push("Operationally precise. CI compliance, POSM counts, budget reconciliation — you'll catch what others miss.");
+  if(p.S<=40){ s.push("Strong conceptually. The JD's 'recommend new activation concepts and engagement mechanics' is where you'll add the most value.");
+               w.push("Detail is a stated JD requirement, not a nice-to-have. Don't assume someone else has the numbers."); }
+  if(p.T>=80){ s.push("Accountable and clear-headed. You'll escalate with a mitigation plan attached, not just a problem.");
+               w.push("The JD wants a 'strong team player' across HQ, regions, agencies and partners. Slow down before you make the efficient call."); }
+  if(p.T<=40) s.push("Partners, dealers and promoters trust you — which is how the difficult things actually get done on the ground.");
+  if(p.T<=20) w.push("You will avoid the hard vendor conversation. The JD requires you to escalate under-performance. Kindness without consequence gets expensive.");
+  if(c.stamina>=60 && c.execution>=60) s.push("Rare combination: you can work a crowd and still hit the timeline. That's the whole job.");
+  if(c.stamina<=40 && c.execution<=40) w.push("Neither the floor nor the plan is your natural home. Worth an honest conversation about whether this is the right seat.");
+  if(!s.length) s.push("Balanced across all four axes — adaptable, useful anywhere in the portfolio, hard to pin to one lane.");
+  if(!w.length) w.push("No structural weakness. Your risk is being spread across too many events at once.");
+  return {s:s.slice(0,4), w:w.slice(0,3)};
+}
+
+/* -------------------------------- svg bits -------------------------------- */
+function gauge(v,color){
+  const r=58, circ=2*Math.PI*r, off=circ-circ*v/100;
+  return `<svg viewBox="0 0 140 140" width="144" height="144" style="flex-shrink:0">
+    <circle cx="70" cy="70" r="${r}" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="10"/>
+    <circle cx="70" cy="70" r="${r}" fill="none" stroke="${color}" stroke-width="10" stroke-linecap="round"
+      stroke-dasharray="${circ}" stroke-dashoffset="${circ}" transform="rotate(-90 70 70)"
+      style="transition:stroke-dashoffset 1.1s cubic-bezier(.2,.8,.2,1)" id="gaugeArc" data-off="${off}"/>
+    <text x="70" y="68" text-anchor="middle" fill="#fff" style="font-family:var(--h);font-weight:600;font-size:30px">${v}</text>
+    <text x="70" y="88" text-anchor="middle" fill="rgba(255,255,255,.55)" style="font-family:var(--b);font-size:10px;letter-spacing:1px">JD FIT</text>
+  </svg>`;
+}
+
+function radar(c){
+  const axes=[["Ownership",c.ownership],["Execution",c.execution],["Stakeholders",c.stakeholder],
+              ["Pressure",c.pressure],["Ideas",c.ideas],["Stamina",c.stamina]];
+  const cx=130, cy=120, R=76;
+  const pt=(i,v)=>{ const a=Math.PI*2*i/axes.length - Math.PI/2, rr=v/100*R;
+    return [cx+rr*Math.cos(a), cy+rr*Math.sin(a)]; };
+  const ring=g=>axes.map((_,i)=>pt(i,g).join(",")).join(" ");
+  let svg=`<svg viewBox="0 0 260 240" style="width:100%;max-width:300px">`;
+  [25,50,75,100].forEach(g=>svg+=`<polygon points="${ring(g)}" fill="none" stroke="rgba(255,255,255,.1)"/>`);
+  axes.forEach((_,i)=>{const[x,y]=pt(i,100);svg+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="rgba(255,255,255,.1)"/>`;});
+  svg+=`<polygon points="${axes.map((a,i)=>pt(i,a[1]).join(",")).join(" ")}" fill="rgba(255,224,0,.22)" stroke="var(--yellow)" stroke-width="2"/>`;
+  axes.forEach((a,i)=>{const[x,y]=pt(i,100);
+    svg+=`<text x="${cx+(x-cx)*1.22}" y="${cy+(y-cy)*1.22+3}" text-anchor="middle" fill="rgba(255,255,255,.6)"
+      style="font-family:var(--b);font-size:9.5px">${a[0]}</text>`;});
+  return svg+"</svg>";
+}
+
+function axisBar(left,right,v){
+  const on = v>=50, width = Math.max(v,100-v);
+  return `<div class="axisrow">
+    <div class="axislabels">
+      <span style="color:${on?'var(--yellow)':'rgba(255,255,255,.45)'};font-weight:${on?700:400}">${left}</span>
+      <span style="color:${!on?'var(--yellow)':'rgba(255,255,255,.45)'};font-weight:${!on?700:400}">${right}</span>
+    </div>
+    <div class="axistrack"><div class="axisfill" style="width:${width}%;${on?'left:0':'right:0'}"></div></div>
+    <div class="axispct">${Math.round(width)}%</div>
+  </div>`;
+}
+
+/* --------------------------------- render --------------------------------- */
+function renderQ(){
+  const q = QUESTIONS[idx];
+  $("counter").textContent = `Question ${idx+1} of ${QUESTIONS.length}`;
+  $("axisLabel").textContent = PILLAR[q.axis];
+  $("bar").style.width = (Object.keys(answers).length / QUESTIONS.length * 100) + "%";
+  $("back").style.visibility = idx>0 ? "visible" : "hidden";
+  $("qbody").innerHTML = `<div class="fade">
+    <div class="jdline">JD: &ldquo;${q.jd}&rdquo;</div>
+    <h2 class="q">${q.q}</h2>
+    <button class="opt" data-k="a"><span class="k">A</span>${q.a}</button>
+    <button class="opt" data-k="b"><span class="k">B</span>${q.b}</button>
+  </div>`;
+  $("qbody").querySelectorAll(".opt").forEach(el=>{
+    if(answers[idx]===el.dataset.k){ el.style.borderColor="var(--yellow)"; el.style.background="rgba(255,224,0,.12)"; }
+    el.onclick = ()=>pick(el.dataset.k);
+  });
+}
+
+function pick(k){
+  answers[idx] = k;
+  if(idx === QUESTIONS.length-1) renderResult();
+  else { idx++; renderQ(); }
+}
+
+function renderResult(){
+  const r = score(), bd = band(r.fit), t = TYPES[r.type], ln = LANES[r.lane], ins = insights(r.pct, r.c);
+  hide("quiz"); hide("intro"); hide("types"); show("result");
+  const laneRows = Object.entries(r.ls).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`
+    <div class="lanerow">
+      <span class="nm ${k===r.lane?'on':''}">${LANES[k].name}</span>
+      <div class="lanetrack"><div class="lanefill ${k===r.lane?'on':''}" style="width:${v}%"></div></div>
+      <span class="vv">${Math.round(v)}</span>
+    </div>`).join("");
+
+  $("result").className = "fade";
+  $("result").innerHTML = `
+    <div class="head">
+      ${gauge(r.fit, bd.color)}
+      <div>
+        <div class="eyebrow" style="margin-bottom:4px">YOUR TYPE</div>
+        <div class="typecode">${r.type}</div>
+        <div class="typename">${t.name} · ${t.nick}</div>
+        <div class="typecore">${t.core}</div>
+      </div>
+    </div>
+
+    <div class="verdict" style="border-left:3px solid ${bd.color}">
+      <b style="color:${bd.color}">${bd.label}</b>
+      <p>${bd.note}</p>
+    </div>
+
+    <div class="cols">
+      <div>
+        <div class="sect">YOUR AXES</div>
+        ${axisBar("Extraverted","Introverted",r.pct.E)}
+        ${axisBar("Sensing","Intuitive",r.pct.S)}
+        ${axisBar("Thinking","Feeling",r.pct.T)}
+        ${axisBar("Judging","Perceiving",r.pct.J)}
+      </div>
+      <div>
+        <div class="sect">AGAINST THE JD'S SIX DEMANDS</div>
+        ${radar(r.c)}
+      </div>
+    </div>
+
+    <div class="lane">
+      <div class="tagline">BEST LANE IN THE TEAM</div>
+      <h3>${ln.name} <span>· ${ln.tag}</span></h3>
+      <p>${ln.desc}</p>
+      ${laneRows}
+    </div>
+
+    <div class="cols">
+      <div class="card">
+        <h4 style="color:var(--yellow)">What you bring to this JD</h4>
+        <ul>${ins.s.map(x=>`<li>${x}</li>`).join("")}</ul>
+      </div>
+      <div class="card">
+        <h4 style="color:var(--ice)">Where the JD will stretch you</h4>
+        <ul>${ins.w.map(x=>`<li>${x}</li>`).join("")}</ul>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
+      <button class="outline" onclick="reset()">Take it again</button>
+      <button class="ghost" style="padding:12px 26px" onclick="window.print()">Print / save as PDF</button>
+    </div>`;
+
+  requestAnimationFrame(()=>{ const arc=$("gaugeArc"); if(arc) arc.style.strokeDashoffset = arc.dataset.off; });
+}
+
+function renderTypes(){
+  $("types").innerHTML = `
+    <h1 style="font-size:30px;margin-bottom:10px">All 16 types, ranked against this JD</h1>
+    <p class="lede" style="font-size:13.5px;color:rgba(255,255,255,.6);max-width:680px">
+      The JD names timelines, deliverables, documentation, reporting accuracy and budget compliance far more often
+      than it names creative ideas. That pushes the ideal profile toward organised and outward-facing. Fit scores
+      below come from the same model the test uses.
+    </p>
+    ${TIERS.map(tier=>`
+      <div class="tier">
+        <div class="tierhead" style="color:${tier.color}">${tier.label}</div>
+        <div class="typegrid">
+          ${tier.types.map(k=>{const t=TYPES[k];return `
+            <div class="tcard" style="border-left:3px solid ${tier.color}">
+              <div class="trow">
+                <div class="tcode">${k} <small>· ${t.name}</small></div>
+                <div class="tfit" style="color:${tier.color}">${t.fit}</div>
+              </div>
+              <div class="tcore">${t.core}</div>
+              <div class="tline"><span style="color:var(--ice)">Superpower · </span>${t.sup}</div>
+              <div class="tline"><span style="color:var(--peach)">Risk · </span>${t.risk}</div>
+              <div class="tlane">Lane: ${t.lane}</div>
+            </div>`;}).join("")}
+        </div>
+      </div>`).join("")}`;
+}
+
+function reset(){
+  idx = 0; answers = {};
+  hide("result"); hide("types"); hide("quiz"); show("intro");
+  $("toggleTypes").textContent = "All 16 types";
+  window.scrollTo(0,0);
+}
+
+/* --------------------------------- wiring --------------------------------- */
+$("start").onclick = ()=>{ hide("intro"); show("quiz"); renderQ(); };
+$("back").onclick = ()=>{ if(idx>0){ idx--; renderQ(); } };
+$("restart1").onclick = reset;
+$("toggleTypes").onclick = ()=>{
+  const open = !$("types").classList.contains("hidden");
+  if(open){
+    hide("types");
+    $("toggleTypes").textContent = "All 16 types";
+    if(Object.keys(answers).length === QUESTIONS.length) show("result");
+    else if(idx>0 || Object.keys(answers).length) show("quiz");
+    else show("intro");
+  } else {
+    renderTypes();
+    hide("intro"); hide("quiz"); hide("result"); show("types");
+    $("toggleTypes").textContent = "← Back";
+    window.scrollTo(0,0);
+  }
+};
+</script>
+</body>
+</html>
